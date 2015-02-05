@@ -1,20 +1,19 @@
-# Errors
+# Status Codes
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-The Kittn API uses the following error codes:
+The Payswitch API uses the following status codes:
 
 
-Error Code | Meaning
----------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slown down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+Status Code | Name | Description
+----------- | ---- | -----------
+00 | Successful | Transaction has been successful
+01 | Insufficient balance | Transaction hasn't been successful due to insufficient credits
+02 | Service providers are down | Transaction wasn't fulfilled because all providers are unavailable
+03 | Invalid API Key | You are not authorized to create this transaction
+04 | System error | Internal service error
+05 | Invalid account id | The account you entered
+06 | Invalid product code | The service you're trying to access doesn't exist
+07 | Invalid payload for the SKU | The API payload needed to fulfill the transaction is incorrect, or insufficient
+08 | Invalid cost / amount entered | You have entered an invalid cost / amount for the payload
+09 | Not found | Service not found
+10 | Failed to complete transaction | Incomplete transaction
+11 | Client correlator already used | Client correlator entered is a duplicate
