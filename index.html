@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Payswitch API Reference</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -39,208 +39,1004 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://www.payswitch.net'>Sign Up for a Developer Key</a></li>
             <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to Payswitch API Documentation! You can use our API to access Payswitch API endpoints, which allows you to connect to our platform&rsquo;s services and start creating your own app.</p>
 
 <p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<h1 id="register-user">Register User</h1>
+
+<p>To use the API, you need to sign up first at <a href="http://www.payswitch.net">www.payswitch.net</a> so we can make your account and give your credentials (email address and auth token).</p>
+
+<h1 id="transactions">Transactions</h1>
+
+<h2 id="get-all-transactions">Get All Transactions</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+     -F <span class="s2">"per_page=2"</span>
+     -F <span class="s2">"page=1"</span>
+     -F <span class="s2">"prod_cat_id=5"</span>
+     -F <span class="s2">"date_from=2/2/15"</span>
+     -F <span class="s2">"date_to=2/4/15"</span>
+http://www.payswitch.net/transactions
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">per_page: </span><span class="mi">2</span><span class="p">,</span>
+  <span class="ss">page: </span><span class="mi">1</span><span class="p">,</span>
+  <span class="ss">prod_cat_id: </span><span class="mi">5</span><span class="p">,</span>
+  <span class="ss">date_from: </span><span class="s1">'2/2/15'</span><span class="p">,</span>
+  <span class="ss">date_to: </span><span class="s1">'2/4/15'</span>
+<span class="p">}</span>
+<span class="n">uri</span><span class="p">.</span><span class="nf">query</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'per_page'</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s">'page'</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">'prod_cat_id'</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s">'date_from'</span> <span class="p">:</span> <span class="s">'2/2/15'</span><span class="p">,</span>
+    <span class="s">'date_to'</span> <span class="p">:</span> <span class="s">'2/4/15'</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">QUERY_PARAMS</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">PARAMS</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">+</span> <span class="s">'?'</span> <span class="o">+</span> <span class="n">QUERY_PARAMS</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>The JSON return value looks like this:</p>
 </blockquote>
-<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"num_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">197</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1104</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-21T13:09:16.000+08:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">196</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">205</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSS - Voluntary Member"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gcash Bancnet"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1103</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1231232"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"330.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-21T12:59:05.000+08:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">196</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">205</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSS - Voluntary Member"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gcash Bancnet"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Get all successful transactions of the user and all its branches/agents.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/transactions</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>numeric<br/>(optional)</td>
+<td>Number of items per page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>numeric<br/>(optional)</td>
+<td>Page number. Must be present together with per_page.</td>
+</tr>
+<tr>
+<td>prod_cat_id</td>
+<td>numeric<br/>(optional)</td>
+<td>Get only transactions with this prod_cat_id</td>
+</tr>
+<tr>
+<td>date_from</td>
+<td>date<br/>(optional)</td>
+<td>Get transactions starting from this date. Must be present together with date_to. Format: mm/dd/yy.</td>
+</tr>
+<tr>
+<td>date_to</td>
+<td>date<br/>(optional)</td>
+<td>Get transactions until this date. Must be present together with date_from. Format: mm/dd/yy.</td>
+</tr>
+</tbody></table>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-transaction">Get a Specific Transaction</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/transactions/&lt;id&gt;
 </code></pre>
-<pre><code class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions/&lt;id&gt;"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions/&lt;id&gt;"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>The JSON return value looks like this:</p>
 </blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1095</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-20T18:46:51.000+08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 10"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Xpressload"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Get the details of a specific transaction by using transaction id.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/transactions/&lt;id&gt;</code></p>
 
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="header-parameters">Header Parameters</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-an-e-load-transaction-using-sku">Create an E-load Transaction using SKU</h2>
+<pre><code class="highlight shell">curl -X POST
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+     -F <span class="s2">"sku=GLOBE15"</span>
+     -F <span class="s2">"payload[account_id]=09273031099"</span>
+http://www.payswitch.net/transactions
 </code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"sku"</span> <span class="o">=&gt;</span> <span class="s2">"GLOBE15"</span><span class="p">,</span>
+  <span class="s2">"payload[account_id]"</span> <span class="o">=&gt;</span> <span class="s2">"09273031099"</span>
+<span class="p">}</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">set_form_data</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
 </code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'sku'</span> <span class="p">:</span> <span class="s">'GLOBE15'</span><span class="p">,</span>
+    <span class="s">'payload[account_id]'</span> <span class="p">:</span> <span class="s">'09273031099'</span>
+<span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The JSON return value looks like this:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11284</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031093"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-05T23:16:35.196+08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1634974470"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GLOBE15"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EcpayLoad"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a transaction by passing the sku and mobile number as payload.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.payswitch.net/transactions</code></p>
+
+<h3 id="transaction-payloads">Transaction Payloads</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sku</td>
+<td>string<br/>(required)</td>
+<td>The product&rsquo;s SKU code</td>
+</tr>
+<tr>
+<td>payload[account_id]</td>
+<td>string<br/>(required)</td>
+<td>The mobile number of the customer</td>
+</tr>
+</tbody></table>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-an-e-load-transaction-using-product-id">Create an E-load Transaction using Product ID</h2>
+<pre><code class="highlight shell">curl -X POST
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+     -F <span class="s2">"product_id=336"</span>
+     -F <span class="s2">"payload[account_id]=09273031099"</span>
+http://www.payswitch.net/transactions
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"product_id"</span> <span class="o">=&gt;</span> <span class="mi">336</span><span class="p">,</span>
+  <span class="s2">"payload[account_id]"</span> <span class="o">=&gt;</span> <span class="s2">"09273031099"</span>
+<span class="p">}</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">set_form_data</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'product_id'</span> <span class="p">:</span> <span class="mi">336</span><span class="p">,</span>
+    <span class="s">'payload[account_id]'</span> <span class="p">:</span> <span class="s">'09273031099'</span>
+<span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>The JSON return value looks like this:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11284</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031093"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-05T23:16:35.196+08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1634974470"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GLOBE15"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EcpayLoad"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a transaction by passing the product id and mobile number as payload.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.payswitch.net/transactions</code></p>
+
+<h3 id="transaction-payloads">Transaction Payloads</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product_id</td>
+<td>numeric<br/>(required)</td>
+<td>The product&rsquo;s id</td>
+</tr>
+<tr>
+<td>payload[account_id]</td>
+<td>string<br/>(required)</td>
+<td>The mobile number of the customer</td>
+</tr>
+</tbody></table>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h1 id="product-categories">Product Categories</h1>
+
+<h2 id="get-main-product-categories">Get Main Product Categories</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/product_categories/main
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="no">URL</span> <span class="o">=</span> <span class="s2">"http://www.payswitch.net/api/product_categories/main"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/product_categories/main"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>The JSON return value looks like this:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-load"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gaming Pins"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mobile Money"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bills Payment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travel"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microinsurance"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:56.000+08:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Get the main product categories.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/product_categories/main</code></p>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-product-categories-with-product-listing">Get Product Categories with Product Listing</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/product_categories/&lt;id&gt;
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="no">URL</span> <span class="o">=</span> <span class="s2">"http://www.payswitch.net/api/product_categories/&lt;id&gt;"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/product_categories/&lt;id&gt;"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>The JSON return value looks like this:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-Games"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 10 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 10 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 100 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 100 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">129</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 1000 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-games 1000 points"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Get the product categories containing the list of their products (if available).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/product_categories/&lt;id&gt;</code></p>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h1 id="products">Products</h1>
+
+<h2 id="get-all-products">Get All Products</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/products<span class="s2">"
+</span></code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="no">URL</span> <span class="o">=</span> <span class="s2">"http://www.payswitch.net/api/products"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>The JSON return value looks like this:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+    </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 10"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 50"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 150"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 300"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sun 500"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p>Get the list of all products.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/products</code></p>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
 </tr>
 </tbody></table>
 
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id="get-product-details">Get Product Details</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/products/&lt;id&gt;<span class="s2">"
+</span></code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="no">URL</span> <span class="o">=</span> <span class="s2">"http://www.payswitch.net/api/products/&lt;id&gt;"</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
 </code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products/&lt;id&gt;"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The JSON return value looks like this:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"product_category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GLOBEUnlitxt20"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe Unlitxt20"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"credits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:33:01.000+08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe Promos"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Get the details of a product given its id.</p>
 
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/products/&lt;id&gt;</code></p>
+
+<h3 id="header-parameters">Header Parameters</h3>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
 </tr>
 </tbody></table>
 
-          <h1 id='errors'>Errors</h1>
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
+          <h1 id="status-codes">Status Codes</h1>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The Payswitch API uses the following status codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Status Code</th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>00</td>
+<td>Successful</td>
+<td>Transaction has been successful</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>01</td>
+<td>Insufficient balance</td>
+<td>Transaction hasn&rsquo;t been successful due to insufficient credits</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>02</td>
+<td>Service providers are down</td>
+<td>Transaction wasn&rsquo;t fulfilled because all providers are unavailable</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>03</td>
+<td>Invalid API Key</td>
+<td>You are not authorized to create this transaction</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>04</td>
+<td>System error</td>
+<td>Internal service error</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>05</td>
+<td>Invalid account id</td>
+<td>The account you entered</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td>06</td>
+<td>Invalid product code</td>
+<td>The service you&rsquo;re trying to access doesn&rsquo;t exist</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>07</td>
+<td>Invalid payload for the SKU</td>
+<td>The API payload needed to fulfill the transaction is incorrect, or insufficient</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+<td>08</td>
+<td>Invalid cost / amount entered</td>
+<td>You have entered an invalid cost / amount for the payload</td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>09</td>
+<td>Not found</td>
+<td>Service not found</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>10</td>
+<td>Failed to complete transaction</td>
+<td>Incomplete transaction</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Client correlator already used</td>
+<td>Client correlator entered is a duplicate</td>
 </tr>
 </tbody></table>
 
