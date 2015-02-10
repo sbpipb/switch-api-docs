@@ -43,23 +43,27 @@ response = urllib2.urlopen(request).read()
 [
     {
         "id": 3,
-        "email": "agent@demomerchant.com",
         "created_at": "2014-09-10T13:32:59.000+08:00",
         "branch_id": 2,
         "name": "Demo Agent",
         "contact_number": null,
-        "banned": false,
-        "balance": "205.0"
+        "balance": "345.0"
     },
     {
         "id": 8,
-        "email": "agent2@demomerchant.com",
         "created_at": "2014-09-24T17:26:38.000+08:00",
         "branch_id": 2,
         "name": "Demo 2 Payswitch",
         "contact_number": "09201234567",
-        "banned": false,
-        "balance": "840.0"
+        "balance": "1000.0"
+    },
+    {
+        "id": 18,
+        "created_at": "2014-11-05T07:38:07.000+08:00",
+        "branch_id": 2,
+        "name": "Branch Three",
+        "contact_number": "09201234567",
+        "balance": "195.0"
     }
 ]
 ```
@@ -86,13 +90,13 @@ X-User-Token | string<br/>(required) | The user's authentication token
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/agents/<id>
+http://www.payswitch.net/agents/8
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/agents/<id>")
+uri = URI("http://www.payswitch.net/agents/8")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -107,7 +111,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/agents/<id>"
+URL = "http://www.payswitch.net/agents/8"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
