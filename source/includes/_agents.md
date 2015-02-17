@@ -130,7 +130,8 @@ response = urllib2.urlopen(request).read()
     "updated_at": "2014-11-10T00:42:20.000+08:00",
     "name": "Demo 2 Payswitch",
     "authentication_token": "j1Q7JNu-CMHcgNPRgxyu",
-    "contact_number": "09201234567"
+    "contact_number": "09201234567",
+    "balance": "1000.0"
 }
 ```
 
