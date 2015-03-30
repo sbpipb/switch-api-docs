@@ -66,8 +66,8 @@
      -F <span class="s2">"per_page=2"</span>
      -F <span class="s2">"page=1"</span>
      -F <span class="s2">"prod_cat_id=5"</span>
-     -F <span class="s2">"date_from=2/2/15"</span>
-     -F <span class="s2">"date_to=2/4/15"</span>
+     -F <span class="s2">"date_from=2/2/2015"</span>
+     -F <span class="s2">"date_to=2/4/2015"</span>
 http://www.payswitch.net/transactions
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
@@ -77,8 +77,8 @@ http://www.payswitch.net/transactions
   <span class="ss">per_page: </span><span class="mi">2</span><span class="p">,</span>
   <span class="ss">page: </span><span class="mi">1</span><span class="p">,</span>
   <span class="ss">prod_cat_id: </span><span class="mi">5</span><span class="p">,</span>
-  <span class="ss">date_from: </span><span class="s1">'2/2/15'</span><span class="p">,</span>
-  <span class="ss">date_to: </span><span class="s1">'2/4/15'</span>
+  <span class="ss">date_from: </span><span class="s1">'2/2/2015'</span><span class="p">,</span>
+  <span class="ss">date_to: </span><span class="s1">'2/4/2015'</span>
 <span class="p">}</span>
 <span class="n">uri</span><span class="p">.</span><span class="nf">query</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
@@ -102,8 +102,8 @@ http://www.payswitch.net/transactions
     <span class="s">'per_page'</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s">'page'</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s">'prod_cat_id'</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s">'date_from'</span> <span class="p">:</span> <span class="s">'2/2/15'</span><span class="p">,</span>
-    <span class="s">'date_to'</span> <span class="p">:</span> <span class="s">'2/4/15'</span><span class="p">,</span>
+    <span class="s">'date_from'</span> <span class="p">:</span> <span class="s">'2/2/2015'</span><span class="p">,</span>
+    <span class="s">'date_to'</span> <span class="p">:</span> <span class="s">'2/4/2015'</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">QUERY_PARAMS</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">PARAMS</span><span class="p">)</span>
 <span class="n">URL</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">+</span> <span class="s">'?'</span> <span class="o">+</span> <span class="n">QUERY_PARAMS</span>
@@ -233,12 +233,12 @@ http://www.payswitch.net/transactions
 <tr>
 <td>date_from</td>
 <td>date<br/>(optional)</td>
-<td>Get transactions starting from this date. Must be present together with date_to. Format: mm/dd/yy.</td>
+<td>Get transactions starting from this date. Must be present together with date_to. Format: dd/mm/yy.</td>
 </tr>
 <tr>
 <td>date_to</td>
 <td>date<br/>(optional)</td>
-<td>Get transactions until this date. Must be present together with date_from. Format: mm/dd/yy.</td>
+<td>Get transactions until this date. Must be present together with date_from. Format: dd/mm/yy.</td>
 </tr>
 </tbody></table>
 
@@ -949,6 +949,16 @@ http://www.payswitch.net/api/products/&lt;id&gt;
     </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>The JSON return value when you try to fetch a non-existing product</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Couldn't find Product with id=500"</span><span class="w"> 
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <p>Get the details of a product given its id.</p>
