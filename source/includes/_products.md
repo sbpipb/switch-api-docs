@@ -135,6 +135,16 @@ response = urllib2.urlopen(request).read()
 }
 ```
 
+> The JSON return value when you try to fetch a non-existing product
+
+```json
+[
+  {
+    "Error": "Couldn't find Product with id=500" 
+  }
+]
+```
+
 Get the details of a product given its id.
 
 ### HTTP Request

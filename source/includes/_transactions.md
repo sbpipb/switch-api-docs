@@ -10,8 +10,8 @@ curl -X GET
      -F "per_page=2"
      -F "page=1"
      -F "prod_cat_id=5"
-     -F "date_from=2/2/15"
-     -F "date_to=2/4/15"
+     -F "date_from=2/2/2015"
+     -F "date_to=2/4/2015"
 http://www.payswitch.net/transactions
 ```
 
@@ -23,8 +23,8 @@ params = {
   per_page: 2,
   page: 1,
   prod_cat_id: 5,
-  date_from: '2/2/15',
-  date_to: '2/4/15'
+  date_from: '2/2/2015',
+  date_to: '2/4/2015'
 }
 uri.query = URI.encode_www_form(params)
 
@@ -50,8 +50,8 @@ PARAMS = {
     'per_page' : 2,
     'page' : 1,
     'prod_cat_id' : 5,
-    'date_from' : '2/2/15',
-    'date_to' : '2/4/15',
+    'date_from' : '2/2/2015',
+    'date_to' : '2/4/2015',
 }
 QUERY_PARAMS = urllib.urlencode(PARAMS)
 URL = URL + '?' + QUERY_PARAMS
@@ -161,8 +161,8 @@ Parameter | Type | Description
 per_page | numeric<br/>(optional) | Number of items per page
 page | numeric<br/>(optional) | Page number. Must be present together with per_page.
 prod_cat_id | numeric<br/>(optional) | Get only transactions with this prod_cat_id
-date_from | date<br/>(optional) | Get transactions starting from this date. Must be present together with date_to. Format: mm/dd/yy.
-date_to | date<br/>(optional) | Get transactions until this date. Must be present together with date_from. Format: mm/dd/yy.
+date_from | date<br/>(optional) | Get transactions starting from this date. Must be present together with date_to. Format: dd/mm/yy.
+date_to | date<br/>(optional) | Get transactions until this date. Must be present together with date_from. Format: dd/mm/yy.
 
 ### Header Parameters
 
