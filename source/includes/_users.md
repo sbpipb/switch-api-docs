@@ -24,7 +24,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/users/current"
@@ -58,7 +57,7 @@ Get the details of the current user
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/api/users`
+`GET http://www.payswitch.net/api/users/current`
 
 ### Header Parameters
 

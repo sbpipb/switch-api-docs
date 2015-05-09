@@ -182,7 +182,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/products/top"
@@ -314,7 +313,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/products/top"
@@ -465,13 +463,13 @@ curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
      -F "type=billers"
-http://www.payswitch.net/api/products/top-billers
+http://www.payswitch.net/api/products/top
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/api/products/top-billers")
+uri = URI("http://www.payswitch.net/api/products/top")
 params = {
   type: 'billers'
 }
@@ -487,10 +485,9 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/api/products/top-billers"
+URL = "http://www.payswitch.net/api/products/top"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -566,7 +563,7 @@ Get top 10 billers of the month.
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/api/products/top-billers`
+`GET http://www.payswitch.net/api/products/top`
 
 ### Header Parameters
 

@@ -24,7 +24,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/agents"
@@ -114,7 +113,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/agents/8"

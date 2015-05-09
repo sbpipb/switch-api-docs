@@ -9,9 +9,11 @@ curl -X GET
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
      -F "per_page=2"
      -F "page=1"
-     -F "prod_cat_id=5"
+     -F "prod_cat_id=1"
      -F "date_from=2/2/2015"
-     -F "date_to=2/4/2015"
+     -F "date_to=4/2/2015"
+     -F "branch_id=2"
+     -F "agent_id=3"
 http://www.payswitch.net/api/transactions
 ```
 
@@ -22,9 +24,11 @@ uri = URI("http://www.payswitch.net/api/transactions")
 params = {
   per_page: 2,
   page: 1,
-  prod_cat_id: 5,
+  prod_cat_id: 1,
   date_from: '2/2/2015',
-  date_to: '2/4/2015'
+  date_to: '4/2/2015',
+  branch_id: 2,
+  agent_id: 3
 }
 uri.query = URI.encode_www_form(params)
 
@@ -38,7 +42,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/transactions"
@@ -49,9 +52,11 @@ HEADERS = {
 PARAMS = {
     'per_page' : 2,
     'page' : 1,
-    'prod_cat_id' : 5,
+    'prod_cat_id' : 1,
     'date_from' : '2/2/2015',
-    'date_to' : '2/4/2015',
+    'date_to' : '4/2/2015',
+    'branch_id' : 2,
+    'agent_id' : 3
 }
 QUERY_PARAMS = urllib.urlencode(PARAMS)
 URL = URL + '?' + QUERY_PARAMS
@@ -64,55 +69,16 @@ response = urllib2.urlopen(request).read()
 
 ```json
 {
-    "total_items": 33,
+    "total_items": 4,
     "transactions": [
         {
-            "id": 1425,
+            "id": 1158,
             "payload": {
-                "to_account_id": "09273031099"
+                "account_id": "09156426897"
             },
-            "cost": "5.0",
-            "created_at": "2015-03-30T09:00:02.000+08:00",
-            "provider_refno": "1039427353",
-            "provider_message": {
-                "code": null,
-                "message": "Transaction successful."
-            },
-            "transaction_status": {
-                "code": "00",
-                "name": "Successful",
-                "description": "Transaction has been successful"
-            },
-            "user": {
-                "id": 2,
-                "type": "Branch",
-                "name": "Demo Branch",
-                "merchant": {
-                    "id": 1,
-                    "name": "Demo Merchant"
-                }
-            },
-            "provider_product": {
-                "id": 122,
-                "product_category_root_id": 12,
-                "product": {
-                    "id": 122,
-                    "name": "GCash Cash-in"
-                },
-                "provider": {
-                    "id": 4,
-                    "name": "Gcash"
-                }
-            }
-        },
-        {
-            "id": 1419,
-            "payload": {
-                "to_account_id": "09158233358"
-            },
-            "cost": "5.0",
-            "created_at": "2015-03-24T15:56:27.000+08:00",
-            "provider_refno": "1034082203",
+            "cost": "30.0",
+            "created_at": "2015-02-04T14:34:39.000+08:00",
+            "provider_refno": "1620638746",
             "provider_message": {
                 "code": null,
                 "message": "Transaction successful."
@@ -132,15 +98,132 @@ response = urllib2.urlopen(request).read()
                 }
             },
             "provider_product": {
-                "id": 123,
-                "product_category_root_id": 12,
+                "id": 337,
+                "product_category_root_id": 1,
                 "product": {
-                    "id": 123,
-                    "name": "GCash Collect"
+                    "id": 351,
+                    "name": "Globe 30"
                 },
                 "provider": {
-                    "id": 4,
-                    "name": "Gcash"
+                    "id": 11,
+                    "name": "EcpayLoad"
+                }
+            }
+        },
+        {
+            "id": 1157,
+            "payload": {
+                "account_id": "09273031099"
+            },
+            "cost": "15.0",
+            "created_at": "2015-02-04T13:39:30.000+08:00",
+            "provider_refno": "09273031099150204134004",
+            "provider_message": {
+                "code": null,
+                "message": "Transaction successful."
+            },
+            "transaction_status": {
+                "code": "00",
+                "name": "Successful",
+                "description": "Transaction has been successful"
+            },
+            "user": {
+                "id": 3,
+                "type": "BranchAgent",
+                "name": "Demo Agent",
+                "merchant": {
+                    "id": 1,
+                    "name": "Demo Merchant"
+                }
+            },
+            "provider_product": {
+                "id": 502,
+                "product_category_root_id": 1,
+                "product": {
+                    "id": 336,
+                    "name": "Globe 15"
+                },
+                "provider": {
+                    "id": 3,
+                    "name": "Ayannah"
+                }
+            }
+        },
+        {
+            "id": 1149,
+            "payload": {
+                "account_id": "09232979579"
+            },
+            "cost": "50.0",
+            "created_at": "2015-02-02T14:54:51.000+08:00",
+            "provider_refno": "OTH-vyl2k4450aqzwm45cwau0055",
+            "provider_message": {
+                "code": null,
+                "message": "Transaction successful."
+            },
+            "transaction_status": {
+                "code": "00",
+                "name": "Successful",
+                "description": "Transaction has been successful"
+            },
+            "user": {
+                "id": 3,
+                "type": "BranchAgent",
+                "name": "Demo Agent",
+                "merchant": {
+                    "id": 1,
+                    "name": "Demo Merchant"
+                }
+            },
+            "provider_product": {
+                "id": 20,
+                "product_category_root_id": 1,
+                "product": {
+                    "id": 20,
+                    "name": "Sun Call & Text Combo 50"
+                },
+                "provider": {
+                    "id": 2,
+                    "name": "Xpressload"
+                }
+            }
+        },
+        {
+            "id": 1148,
+            "payload": {
+                "account_id": "09331994071"
+            },
+            "cost": "50.0",
+            "created_at": "2015-02-02T14:52:39.000+08:00",
+            "provider_refno": "OTH-x0ti5fn5vhivt2455yrejq55",
+            "provider_message": {
+                "code": null,
+                "message": "Transaction successful."
+            },
+            "transaction_status": {
+                "code": "00",
+                "name": "Successful",
+                "description": "Transaction has been successful"
+            },
+            "user": {
+                "id": 3,
+                "type": "BranchAgent",
+                "name": "Demo Agent",
+                "merchant": {
+                    "id": 1,
+                    "name": "Demo Merchant"
+                }
+            },
+            "provider_product": {
+                "id": 20,
+                "product_category_root_id": 1,
+                "product": {
+                    "id": 20,
+                    "name": "Sun Call & Text Combo 50"
+                },
+                "provider": {
+                    "id": 2,
+                    "name": "Xpressload"
                 }
             }
         }
@@ -295,7 +378,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/transactions"
@@ -418,7 +500,6 @@ body = response.body
 ```
 
 ```python
-import urllib
 import urllib2
 
 URL = "http://www.payswitch.net/api/transactions"
