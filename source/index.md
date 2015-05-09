@@ -17,6 +17,7 @@ includes:
   - transactions
   - product-categories
   - products
+  - branches
   - agents
   - errors
 

@@ -6,13 +6,13 @@
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/api/users
+http://www.payswitch.net/api/users/current
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/api/users")
+uri = URI("http://www.payswitch.net/api/users/current")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -27,7 +27,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/api/users"
+URL = "http://www.payswitch.net/api/users/current"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -40,24 +40,19 @@ response = urllib2.urlopen(request).read()
 
 ```json
 {
-    "info": "Current User",
-    "user": {
-        "id": 2,
-        "email": "branch@demomerchant.com",
-        "created_at": "2014-09-10T13:32:58.000+08:00",
-        "updated_at": "2015-03-31T13:08:15.000+08:00",
-        "merchant_id": 1,
-        "branch_id": null,
-        "name": "Demo Branch",
-        "authentication_token": "_KHS4euMs1At4jsUHHdR",
-        "plutus_account_id": 7,
-        "contact_number": null,
-        "banned": false,
-        "plan_id": null
+    "success": true,
+    "info": {
+        "id": 1,
+        "email": "admin@demomerchant.com",
+        "name": "Demo Merchant",
+        "authentication_token": "gdzhhNsa7uVkxrzXsy4_",
+        "contact_number": "",
+        "banned": false
     },
-    "user_type": "Branch",
-    "balance": "680.00"
-}	
+    "user_type": "Merchant",
+    "merchant_plan": null,
+    "balance": "399.00"
+}
 ```
 Get the details of the current user
 

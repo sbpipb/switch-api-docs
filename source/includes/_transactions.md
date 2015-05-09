@@ -12,13 +12,13 @@ curl -X GET
      -F "prod_cat_id=5"
      -F "date_from=2/2/2015"
      -F "date_to=2/4/2015"
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/transactions")
+uri = URI("http://www.payswitch.net/api/transactions")
 params = {
   per_page: 2,
   page: 1,
@@ -41,7 +41,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/transactions"
+URL = "http://www.payswitch.net/api/transactions"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -64,16 +64,16 @@ response = urllib2.urlopen(request).read()
 
 ```json
 {
-    "num_pages": 20,
+    "total_items": 33,
     "transactions": [
         {
-            "id": 1213,
+            "id": 1425,
             "payload": {
-                "account_id": "09294358409"
+                "to_account_id": "09273031099"
             },
-            "cost": "15.0",
-            "created_at": "2015-02-16T14:12:54.000+08:00",
-            "provider_refno": "089041145634",
+            "cost": "5.0",
+            "created_at": "2015-03-30T09:00:02.000+08:00",
+            "provider_refno": "1039427353",
             "provider_message": {
                 "code": null,
                 "message": "Transaction successful."
@@ -93,26 +93,26 @@ response = urllib2.urlopen(request).read()
                 }
             },
             "provider_product": {
-                "id": 110,
-                "product_category_root_id": 1,
+                "id": 122,
+                "product_category_root_id": 12,
                 "product": {
-                    "id": 110,
-                    "name": "Smart 15"
+                    "id": 122,
+                    "name": "GCash Cash-in"
                 },
                 "provider": {
-                    "id": 1,
-                    "name": "OksPinoy"
+                    "id": 4,
+                    "name": "Gcash"
                 }
             }
         },
         {
-            "id": 1212,
+            "id": 1419,
             "payload": {
-                "account_id": "09278875368"
+                "to_account_id": "09158233358"
             },
-            "cost": "15.0",
-            "created_at": "2015-02-13T18:46:43.000+08:00",
-            "provider_refno": "1693312999",
+            "cost": "5.0",
+            "created_at": "2015-03-24T15:56:27.000+08:00",
+            "provider_refno": "1034082203",
             "provider_message": {
                 "code": null,
                 "message": "Transaction successful."
@@ -123,24 +123,24 @@ response = urllib2.urlopen(request).read()
                 "description": "Transaction has been successful"
             },
             "user": {
-                "id": 8,
+                "id": 3,
                 "type": "BranchAgent",
-                "name": "Demo 2 Payswitch",
+                "name": "Demo Agent",
                 "merchant": {
                     "id": 1,
                     "name": "Demo Merchant"
                 }
             },
             "provider_product": {
-                "id": 317,
-                "product_category_root_id": 1,
+                "id": 123,
+                "product_category_root_id": 12,
                 "product": {
-                    "id": 336,
-                    "name": "Globe 15"
+                    "id": 123,
+                    "name": "GCash Collect"
                 },
                 "provider": {
-                    "id": 11,
-                    "name": "EcpayLoad"
+                    "id": 4,
+                    "name": "Gcash"
                 }
             }
         }
@@ -152,7 +152,7 @@ Get all successful transactions of the user and all its branches/agents.
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/transactions`
+`GET http://www.payswitch.net/api/transactions`
 
 ### Query Parameters
 
@@ -178,13 +178,13 @@ X-User-Token | string<br/>(required) | The user's authentication token
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/transactions/<id>
+http://www.payswitch.net/api/transactions/<id>
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/transactions/<id>")
+uri = URI("http://www.payswitch.net/api/transactions/<id>")
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
 request_uri.add_field('X-User-Email', 'warex03@gmail.com')
@@ -197,7 +197,7 @@ body = response.body
 ```python
 import urllib2
 
-URL = "http://www.payswitch.net/transactions/<id>"
+URL = "http://www.payswitch.net/api/transactions/<id>"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -255,7 +255,7 @@ Get the details of a specific transaction by using transaction id.
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/transactions/<id>`
+`GET http://www.payswitch.net/api/transactions/<id>`
 
 ### Header Parameters
 
@@ -273,13 +273,13 @@ curl -X POST
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
      -F "sku=GLOBE15"
      -F "payload[account_id]=09273031099"
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/transactions")
+uri = URI("http://www.payswitch.net/api/transactions")
 params = {
   "sku" => "GLOBE15",
   "payload[account_id]" => "09273031099"
@@ -298,7 +298,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/transactions"
+URL = "http://www.payswitch.net/api/transactions"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -317,48 +317,61 @@ response = urllib2.urlopen(request).read()
 
 ```json
 {
-  "id": 11284,
-  "payload": {
-    "account_id": "09273031093"
-  },
-  "cost": "15.0",
-  "created_at": "2015-02-05T23:16:35.196+08:00",
-  "provider_refno": "1634974470",
-  "transaction_status": {
-    "code": "00",
-    "name": "Successful",
-    "description": "Transaction has been successful"
-  },
-  "user": {
-    "id": 2,
-    "type": "Branch",
-    "name": "Demo Branch",
-    "merchant": {
-      "id": 1,
-      "name": "Demo Merchant"
-    }
-  },
-  "provider_product": {
-    "id": 1,
-    "product_category_root_id": 1,
-    "product": {
-      "id": 336,
-      "sku": "GLOBE15",
-      "name": "Globe 15"
+    "id": 1552,
+    "payload": {
+        "account_id": "09273031099"
     },
-    "provider": {
-      "id": 11,
-      "name": "EcpayLoad"
+    "cost": "15.0",
+    "created_at": "2015-05-08T10:03:42.423+08:00",
+    "provider_refno": null,
+    "provider_message": {
+        "code": null,
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 619,
+        "product_category_root_id": 1,
+        "product": {
+            "id": 336,
+            "name": "Globe 15"
+        },
+        "provider": {
+            "id": 13,
+            "name": "Iamax"
+        }
     }
-  }
 }
+```
+
+> The JSON return value when you try to fetch a non-existing transactions
+
+```json
+[
+  {
+    "error": "Couldn't find Transaction with id=500"
+  }
+]
 ```
 
 Create a transaction by passing the sku and mobile number as payload.
 
 ### HTTP Request
 
-`POST http://www.payswitch.net/transactions`
+`POST http://www.payswitch.net/api/transactions`
 
 ### Transaction Payloads
 
@@ -383,13 +396,13 @@ curl -X POST
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
      -F "product_id=336"
      -F "payload[account_id]=09273031099"
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/transactions")
+uri = URI("http://www.payswitch.net/api/transactions")
 params = {
   "product_id" => 336,
   "payload[account_id]" => "09273031099"
@@ -408,7 +421,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/transactions"
+URL = "http://www.payswitch.net/api/transactions"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -427,40 +440,43 @@ response = urllib2.urlopen(request).read()
 
 ```json
 {
-  "id": 11284,
-  "payload": {
-    "account_id": "09273031093"
-  },
-  "cost": "15.0",
-  "created_at": "2015-02-05T23:16:35.196+08:00",
-  "provider_refno": "1634974470",
-  "transaction_status": {
-    "code": "00",
-    "name": "Successful",
-    "description": "Transaction has been successful"
-  },
-  "user": {
-    "id": 2,
-    "type": "Branch",
-    "name": "Demo Branch",
-    "merchant": {
-      "id": 1,
-      "name": "Demo Merchant"
-    }
-  },
-  "provider_product": {
-    "id": 1,
-    "product_category_root_id": 1,
-    "product": {
-      "id": 336,
-      "sku": "GLOBE15",
-      "name": "Globe 15"
+    "id": 1552,
+    "payload": {
+        "account_id": "09273031099"
     },
-    "provider": {
-      "id": 11,
-      "name": "EcpayLoad"
+    "cost": "15.0",
+    "created_at": "2015-05-08T10:03:42.423+08:00",
+    "provider_refno": null,
+    "provider_message": {
+        "code": null,
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 619,
+        "product_category_root_id": 1,
+        "product": {
+            "id": 336,
+            "name": "Globe 15"
+        },
+        "provider": {
+            "id": 13,
+            "name": "Iamax"
+        }
     }
-  }
 }
 ```
 
@@ -468,7 +484,7 @@ Create a transaction by passing the product id and mobile number as payload.
 
 ### HTTP Request
 
-`POST http://www.payswitch.net/transactions`
+`POST http://www.payswitch.net/api/transactions`
 
 ### Transaction Payloads
 

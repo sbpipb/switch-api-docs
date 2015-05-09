@@ -6,13 +6,13 @@
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/agents
+http://www.payswitch.net/api/agents
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/agents")
+uri = URI("http://www.payswitch.net/api/agents")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -27,7 +27,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/agents"
+URL = "http://www.payswitch.net/api/agents"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -72,7 +72,7 @@ Get the list of all agents
 
 ### HTTP REQUEST
 
-`GET http://www.payswitch.net/agents`
+`GET http://www.payswitch.net/api/agents`
 
 ### HEADER PARAMETERS
 
@@ -82,7 +82,13 @@ X-User-Email | string<br/>(required) | The user's email address
 X-User-Token | string<br/>(required) | The user's authentication token
 
 
+### PERMISSIONS
 
+User Type | Has access | Description
+--------- | ---------- | -----------
+Merchant | TRUE | All agents under its branches.
+Branch | TRUE | All agents under the branch.
+Agent | FALSE | Permission error message
 
 ## Get Agent Details
 
@@ -90,13 +96,13 @@ X-User-Token | string<br/>(required) | The user's authentication token
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/agents/8
+http://www.payswitch.net/api/agents/8
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/agents/8")
+uri = URI("http://www.payswitch.net/api/agents/8")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -111,7 +117,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/agents/8"
+URL = "http://www.payswitch.net/api/agents/8"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -127,23 +133,42 @@ response = urllib2.urlopen(request).read()
 {
     "id": 8,
     "email": "agent2@demomerchant.com",
-    "updated_at": "2014-11-10T00:42:20.000+08:00",
+    "branch_id": 2,
     "name": "Demo 2 Payswitch",
-    "authentication_token": "j1Q7JNu-CMHcgNPRgxyu",
-    "contact_number": "09201234567",
-    "balance": "1000.0"
+    "contact_number": "09209876543",
+    "banned": false,
+    "balance": "240.0"
 }
+```
+
+> The JSON return value when you try to fetch a non-existing agent
+
+```json
+[
+  {
+    "success": false,
+    "message": "Agent user not found."
+  }
+]
 ```
 
 Get the details of an agent given its id.
 
 ### HTTP REQUEST
 
-`GET http://www.payswitch.net/agents/<id>`
+`GET http://www.payswitch.net/api/agents/<id>`
 
 ### HEADER PARAMETERS
 
 Parameter | Type | Description
---------- | ------- | -----------
+--------- | ---- | -----------   
 X-User-Email | string<br/>(required) | The user's email address
 X-User-Token | string<br/>(required) | The user's authentication token
+
+### PERMISSIONS
+
+User Type | Has access | Description
+--------- | ---------- | -----------
+Merchant | TRUE | Return agent details.
+Branch | TRUE | Return agent details.
+Agent | FALSE | Permission error message.

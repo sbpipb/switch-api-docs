@@ -164,13 +164,13 @@ X-User-Token | string<br/>(required) | The user's authentication token
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/api/products/top-products
+http://www.payswitch.net/api/products/top
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/api/products/top-products")
+uri = URI("http://www.payswitch.net/api/products/top")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -185,7 +185,7 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/api/products/top-products"
+URL = "http://www.payswitch.net/api/products/top"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
@@ -276,7 +276,7 @@ Get top 10 products of the day.
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/api/products/top-products`
+`GET http://www.payswitch.net/api/products/top`
 
 ### Header Parameters
 
@@ -285,20 +285,24 @@ Parameter | Type | Description
 X-User-Email | string<br/>(required) | The user's email address
 X-User-Token | string<br/>(required) | The user's authentication token
 
-
 ## Get Top Eloads
 
 ```shell
 curl -X GET 
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/api/products/top-eloads
+     -F "type=eloads"
+http://www.payswitch.net/api/products/top
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/api/products/top-eloads")
+uri = URI("http://www.payswitch.net/api/products/top")
+params = {
+  type: 'eloads'
+}
+uri.query = URI.encode_www_form(params)
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -313,11 +317,16 @@ body = response.body
 import urllib
 import urllib2
 
-URL = "http://www.payswitch.net/api/products/top-eloads"
+URL = "http://www.payswitch.net/api/products/top"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
 }
+PARAMS = {
+  'type': 'eloads'
+}
+QUERY_PARAMS = urllib.urlencode(PARAMS)
+URL = URL + '?' + QUERY_PARAMS
 
 request = urllib2.Request(URL, headers=HEADERS)
 response = urllib2.urlopen(request).read()
@@ -434,7 +443,7 @@ Get top 10 eload products of the month.
 
 ### HTTP Request
 
-`GET http://www.payswitch.net/api/products/top-eloads`
+`GET http://www.payswitch.net/api/products/top`
 
 ### Header Parameters
 
@@ -443,6 +452,11 @@ Parameter | Type | Description
 X-User-Email | string<br/>(required) | The user's email address
 X-User-Token | string<br/>(required) | The user's authentication token
 
+### Query Parameters
+
+Paramter | Type | Description
+-------- | ---- | -----------
+type | string<br />(required) | The type of product
 
 ## Get Top Billers
 
@@ -450,6 +464,7 @@ X-User-Token | string<br/>(required) | The user's authentication token
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
+     -F "type=billers"
 http://www.payswitch.net/api/products/top-billers
 ```
 
@@ -457,6 +472,10 @@ http://www.payswitch.net/api/products/top-billers
 require 'net/https'
 
 uri = URI("http://www.payswitch.net/api/products/top-billers")
+params = {
+  type: 'billers'
+}
+uri.query = URI.encode_www_form(params)
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -476,6 +495,11 @@ HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
 }
+PARAMS = {
+  'type': 'billers'
+}
+QUERY_PARAMS = urllib.urlencode(PARAMS)
+URL = URL + '?' + QUERY_PARAMS
 
 request = urllib2.Request(URL, headers=HEADERS)
 response = urllib2.urlopen(request).read()
@@ -550,3 +574,9 @@ Parameter | Type | Description
 --------- | ------- | -----------
 X-User-Email | string<br/>(required) | The user's email address
 X-User-Token | string<br/>(required) | The user's authentication token
+
+### Query Parameters
+
+Paramter | Type | Description
+-------- | ---- | -----------
+type | string<br />(required) | The type of product
