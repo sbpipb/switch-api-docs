@@ -198,6 +198,7 @@ response = urllib2.urlopen(request).read()
 ```
 
 Get all branches with agents when current user is a Merchant
+
 Get ID, name and its agents when current user is a Branch
 
 ### HTTP REQUEST
