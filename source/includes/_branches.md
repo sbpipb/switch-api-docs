@@ -197,7 +197,8 @@ response = urllib2.urlopen(request).read()
 ]
 ```
 
-Get 
+Get all branches with agents when current user is a Merchant
+Get ID, name and its agents when current user is a Branch
 
 ### HTTP REQUEST
 
@@ -321,6 +322,8 @@ response = urllib2.urlopen(request).read()
 ```
 
 Get the details of a branch and its agents
+
+### HTTP REQUEST
 
 `GET http://www.payswitch.net/api/branches/<id>`
 
