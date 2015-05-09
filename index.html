@@ -63,11 +63,11 @@
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/api/users
+http://www.payswitch.net/api/users/current
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/users"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/users/current"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -80,7 +80,7 @@ http://www.payswitch.net/api/users
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/users"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/users/current"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -94,24 +94,19 @@ http://www.payswitch.net/api/users
 <p>JSON output</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Current User"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"branch@demomerchant.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-10T13:32:58.000+08:00"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-31T13:08:15.000+08:00"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_KHS4euMs1At4jsUHHdR"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"plutus_account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"plan_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@demomerchant.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gdzhhNsa7uVkxrzXsy4_"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"680.00"</span><span class="w">
-</span><span class="p">}</span><span class="w">   
+    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merchant"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"merchant_plan"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"399.00"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Get the details of the current user</p>
@@ -152,11 +147,11 @@ http://www.payswitch.net/api/users
      -F <span class="s2">"prod_cat_id=5"</span>
      -F <span class="s2">"date_from=2/2/2015"</span>
      -F <span class="s2">"date_to=2/4/2015"</span>
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/transactions"</span><span class="p">)</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
   <span class="ss">per_page: </span><span class="mi">2</span><span class="p">,</span>
   <span class="ss">page: </span><span class="mi">1</span><span class="p">,</span>
@@ -177,7 +172,7 @@ http://www.payswitch.net/transactions
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/transactions"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -200,16 +195,16 @@ http://www.payswitch.net/transactions
 <p>The JSON return value looks like this:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"num_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total_items"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
     </span><span class="s2">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1213</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1425</span><span class="p">,</span><span class="w">
             </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09294358409"</span><span class="w">
+                </span><span class="s2">"to_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031099"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-16T14:12:54.000+08:00"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"089041145634"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-30T09:00:02.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1039427353"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"provider_message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction successful."</span><span class="w">
@@ -229,26 +224,26 @@ http://www.payswitch.net/transactions
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">122</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smart 15"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">122</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GCash Cash-in"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OksPinoy"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gcash"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1212</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1419</span><span class="p">,</span><span class="w">
             </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09278875368"</span><span class="w">
+                </span><span class="s2">"to_account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09158233358"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-13T18:46:43.000+08:00"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1693312999"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-24T15:56:27.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1034082203"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"provider_message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction successful."</span><span class="w">
@@ -259,24 +254,24 @@ http://www.payswitch.net/transactions
                 </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BranchAgent"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo 2 Payswitch"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Agent"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">317</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GCash Collect"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EcpayLoad"</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gcash"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -288,7 +283,7 @@ http://www.payswitch.net/transactions
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/transactions</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/transactions</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -351,11 +346,11 @@ http://www.payswitch.net/transactions
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/transactions/&lt;id&gt;
+http://www.payswitch.net/api/transactions/&lt;id&gt;
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions/&lt;id&gt;"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/transactions/&lt;id&gt;"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
 <span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
@@ -366,7 +361,7 @@ http://www.payswitch.net/transactions/&lt;id&gt;
 </code></pre>
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions/&lt;id&gt;"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/transactions/&lt;id&gt;"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -424,7 +419,7 @@ http://www.payswitch.net/transactions/&lt;id&gt;
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/transactions/&lt;id&gt;</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/transactions/&lt;id&gt;</code></p>
 
 <h3 id="header-parameters">Header Parameters</h3>
 
@@ -453,11 +448,11 @@ http://www.payswitch.net/transactions/&lt;id&gt;
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
      -F <span class="s2">"sku=GLOBE15"</span>
      -F <span class="s2">"payload[account_id]=09273031099"</span>
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/transactions"</span><span class="p">)</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"sku"</span> <span class="o">=&gt;</span> <span class="s2">"GLOBE15"</span><span class="p">,</span>
   <span class="s2">"payload[account_id]"</span> <span class="o">=&gt;</span> <span class="s2">"09273031099"</span>
@@ -474,7 +469,7 @@ http://www.payswitch.net/transactions
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/transactions"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -493,48 +488,61 @@ http://www.payswitch.net/transactions
 <p>The JSON return value looks like this:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11284</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031093"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-05T23:16:35.196+08:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1634974470"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GLOBE15"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031099"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EcpayLoad"</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-08T10:03:42.423+08:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction successful."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">619</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Iamax"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>The JSON return value when you try to fetch a non-existing transactions</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Couldn't find Transaction with id=500"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <p>Create a transaction by passing the sku and mobile number as payload.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://www.payswitch.net/transactions</code></p>
+<p><code class="prettyprint">POST http://www.payswitch.net/api/transactions</code></p>
 
 <h3 id="transaction-payloads">Transaction Payloads</h3>
 
@@ -584,11 +592,11 @@ http://www.payswitch.net/transactions
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
      -F <span class="s2">"product_id=336"</span>
      -F <span class="s2">"payload[account_id]=09273031099"</span>
-http://www.payswitch.net/transactions
+http://www.payswitch.net/api/transactions
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/transactions"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/transactions"</span><span class="p">)</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"product_id"</span> <span class="o">=&gt;</span> <span class="mi">336</span><span class="p">,</span>
   <span class="s2">"payload[account_id]"</span> <span class="o">=&gt;</span> <span class="s2">"09273031099"</span>
@@ -605,7 +613,7 @@ http://www.payswitch.net/transactions
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/transactions"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/transactions"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -624,40 +632,43 @@ http://www.payswitch.net/transactions
 <p>The JSON return value looks like this:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11284</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031093"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-05T23:16:35.196+08:00"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1634974470"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GLOBE15"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1552</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031099"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EcpayLoad"</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-08T10:03:42.423+08:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_refno"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider_message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction successful."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transaction_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Successful"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transaction has been successful"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Merchant"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"provider_product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">619</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product_category_root_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">336</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Globe 15"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Iamax"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -665,7 +676,7 @@ http://www.payswitch.net/transactions
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://www.payswitch.net/transactions</code></p>
+<p><code class="prettyprint">POST http://www.payswitch.net/api/transactions</code></p>
 
 <h3 id="transaction-payloads">Transaction Payloads</h3>
 
@@ -1076,11 +1087,11 @@ http://www.payswitch.net/api/products/&lt;id&gt;
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/api/products/top-products
+http://www.payswitch.net/api/products/top
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/products/top-products"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/products/top"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -1093,7 +1104,7 @@ http://www.payswitch.net/api/products/top-products
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products/top-products"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products/top"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -1184,7 +1195,7 @@ http://www.payswitch.net/api/products/top-products
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/api/products/top-products</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/products/top</code></p>
 
 <h3 id="header-parameters">Header Parameters</h3>
 
@@ -1211,11 +1222,16 @@ http://www.payswitch.net/api/products/top-products
 <pre><code class="highlight shell">curl -X GET 
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/api/products/top-eloads
+     -F <span class="s2">"type=eloads"</span>
+http://www.payswitch.net/api/products/top
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/products/top-eloads"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/products/top"</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">type: </span><span class="s1">'eloads'</span>
+<span class="p">}</span>
+<span class="n">uri</span><span class="p">.</span><span class="nf">query</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -1228,11 +1244,16 @@ http://www.payswitch.net/api/products/top-eloads
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products/top-eloads"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/products/top"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
 <span class="p">}</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'type'</span><span class="p">:</span> <span class="s">'eloads'</span>
+<span class="p">}</span>
+<span class="n">QUERY_PARAMS</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">PARAMS</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">+</span> <span class="s">'?'</span> <span class="o">+</span> <span class="n">QUERY_PARAMS</span>
 
 <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -1349,7 +1370,7 @@ http://www.payswitch.net/api/products/top-eloads
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/api/products/top-eloads</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/products/top</code></p>
 
 <h3 id="header-parameters">Header Parameters</h3>
 
@@ -1372,15 +1393,36 @@ http://www.payswitch.net/api/products/top-eloads
 </tr>
 </tbody></table>
 
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Paramter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string<br />(required)</td>
+<td>The type of product</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-top-billers">Get Top Billers</h2>
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+     -F <span class="s2">"type=billers"</span>
 http://www.payswitch.net/api/products/top-billers
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
 <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/products/top-billers"</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">type: </span><span class="s1">'billers'</span>
+<span class="p">}</span>
+<span class="n">uri</span><span class="p">.</span><span class="nf">query</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -1398,6 +1440,11 @@ http://www.payswitch.net/api/products/top-billers
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
 <span class="p">}</span>
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'type'</span><span class="p">:</span> <span class="s">'billers'</span>
+<span class="p">}</span>
+<span class="n">QUERY_PARAMS</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">PARAMS</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">+</span> <span class="s">'?'</span> <span class="o">+</span> <span class="n">QUERY_PARAMS</span>
 
 <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -1487,17 +1534,33 @@ http://www.payswitch.net/api/products/top-billers
 </tr>
 </tbody></table>
 
-          <h1 id="agents">Agents</h1>
+<h3 id="query-parameters">Query Parameters</h3>
 
-<h2 id="get-all-agents">Get All Agents</h2>
+<table><thead>
+<tr>
+<th>Paramter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string<br />(required)</td>
+<td>The type of product</td>
+</tr>
+</tbody></table>
+
+          <h1 id="branches">Branches</h1>
+
+<h2 id="get-all-branches">Get All Branches</h2>
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/agents
+http://www.payswitch.net/api/branches
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/agents"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/branches"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -1510,7 +1573,424 @@ http://www.payswitch.net/agents
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/agents"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/branches"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>JSON output</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"branch@demomerchant.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031099"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_branch@demomerchant.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09113356989"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Get the list of branches.</p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/branches</code></p>
+
+<h3 id="header-parameters">HEADER PARAMETERS</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h3 id="permissions">PERMISSIONs</h3>
+
+<table><thead>
+<tr>
+<th>User Type</th>
+<th>Has access</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Merchant</td>
+<td>TRUE</td>
+<td>All agents under its branches.</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>FALSE</td>
+<td>Permission error message</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>FALSE</td>
+<td>Permission error message</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-branches-with-agents">Get All Branches with Agents</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/branches/agents
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/branches/agents"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/branches/agents"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>JSON output for Merchant</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"branch_agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent@demomerchant.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Agent"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9302107"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.0"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent2@demomerchant.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo 2 Payswitch"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09209876543"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240.0"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"branch_agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_agent@demomerchant.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Agent"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09222456789"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>JSON output for Branch</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"branch_agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent@demomerchant.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Agent"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9302107"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.0"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent2@demomerchant.com"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo 2 Payswitch"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09209876543"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240.0"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Get </p>
+
+<h3 id="http-request">HTTP REQUEST</h3>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/branches/agents</code></p>
+
+<h3 id="header-parameters">HEADER PARAMETERS</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h3 id="permissions">PERMISSIONS</h3>
+
+<table><thead>
+<tr>
+<th>User Type</th>
+<th>Has access</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Merchant</td>
+<td>TRUE</td>
+<td>All branches with its agents.</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>TRUE</td>
+<td>ID, Name and its agents.</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>FALSE</td>
+<td>Permission error message</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-branch-details">Get Branch Details</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/agents/2
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/agents/2"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/agents/2"</span>
+<span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
+    <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
+<span class="p">}</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre>
+
+<blockquote>
+<p>JSON output</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"branch@demomerchant.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Branch"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09273031099"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"branch_agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent@demomerchant.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo Agent"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9302107"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent2@demomerchant.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo 2 Payswitch"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09209876543"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240.0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meynardbs@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meynard Soriano"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09055726144"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"branch3@local.host"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch Three"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09201234567"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"195.0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>The JSON return value when you try to fetch a non-existing branch</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Branch user not found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Get the details of a branch and its agents</p>
+
+<p><code class="prettyprint">GET http://www.payswitch.net/api/branches/&lt;id&gt;</code></p>
+
+<h3 id="header-parameters">HEADER PARAMETERS</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-User-Email</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s email address</td>
+</tr>
+<tr>
+<td>X-User-Token</td>
+<td>string<br/>(required)</td>
+<td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h3 id="permissions">PERMISSIONS</h3>
+
+<table><thead>
+<tr>
+<th>User Type</th>
+<th>Has access</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Merchant</td>
+<td>TRUE</td>
+<td>Return agent details.</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>FALSE</td>
+<td>Permission error message.</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>FALSE</td>
+<td>Permission error message.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="agents">Agents</h1>
+
+<h2 id="get-all-agents">Get All Agents</h2>
+<pre><code class="highlight shell">curl -X GET
+     -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
+     -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
+http://www.payswitch.net/api/agents
+</code></pre>
+<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/agents"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Email'</span><span class="p">,</span> <span class="s1">'warex03@gmail.com'</span><span class="p">)</span>
+<span class="n">request_uri</span><span class="p">.</span><span class="nf">add_field</span><span class="p">(</span><span class="s1">'X-User-Token'</span><span class="p">,</span> <span class="s1">'_KHS4euMs1At4jsUHHdR'</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request_uri</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">body</span>
+</code></pre>
+<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/agents"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -1555,7 +2035,7 @@ http://www.payswitch.net/agents
 
 <h3 id="http-request">HTTP REQUEST</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/agents</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/agents</code></p>
 
 <h3 id="header-parameters">HEADER PARAMETERS</h3>
 
@@ -1578,15 +2058,41 @@ http://www.payswitch.net/agents
 </tr>
 </tbody></table>
 
+<h3 id="permissions">PERMISSIONS</h3>
+
+<table><thead>
+<tr>
+<th>User Type</th>
+<th>Has access</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Merchant</td>
+<td>TRUE</td>
+<td>All agents under its branches.</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>TRUE</td>
+<td>All agents under the branch.</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>FALSE</td>
+<td>Permission error message</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-agent-details">Get Agent Details</h2>
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/agents/8
+http://www.payswitch.net/api/agents/8
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/agents/8"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/agents/8"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -1599,7 +2105,7 @@ http://www.payswitch.net/agents/8
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/agents/8"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/agents/8"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
@@ -1615,19 +2121,30 @@ http://www.payswitch.net/agents/8
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
     </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent2@demomerchant.com"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-10T00:42:20.000+08:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"branch_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo 2 Payswitch"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j1Q7JNu-CMHcgNPRgxyu"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09201234567"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.0"</span><span class="w">
+    </span><span class="s2">"contact_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09209876543"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"banned"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240.0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>The JSON return value when you try to fetch a non-existing agent</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agent user not found."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
 <p>Get the details of an agent given its id.</p>
 
 <h3 id="http-request">HTTP REQUEST</h3>
 
-<p><code class="prettyprint">GET http://www.payswitch.net/agents/&lt;id&gt;</code></p>
+<p><code class="prettyprint">GET http://www.payswitch.net/api/agents/&lt;id&gt;</code></p>
 
 <h3 id="header-parameters">HEADER PARAMETERS</h3>
 
@@ -1647,6 +2164,32 @@ http://www.payswitch.net/agents/8
 <td>X-User-Token</td>
 <td>string<br/>(required)</td>
 <td>The user&rsquo;s authentication token</td>
+</tr>
+</tbody></table>
+
+<h3 id="permissions">PERMISSIONS</h3>
+
+<table><thead>
+<tr>
+<th>User Type</th>
+<th>Has access</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Merchant</td>
+<td>TRUE</td>
+<td>Return agent details.</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>TRUE</td>
+<td>Return agent details.</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>FALSE</td>
+<td>Permission error message.</td>
 </tr>
 </tbody></table>
 
