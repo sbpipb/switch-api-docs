@@ -80,7 +80,7 @@ response = urllib2.urlopen(request).read()
             "created_at": "2015-02-04T14:34:39.000+08:00",
             "provider_refno": "1620638746",
             "provider_message": {
-                "code": null,
+                "code": "12345",
                 "message": "Transaction successful."
             },
             "transaction_status": {
@@ -119,7 +119,7 @@ response = urllib2.urlopen(request).read()
             "created_at": "2015-02-04T13:39:30.000+08:00",
             "provider_refno": "09273031099150204134004",
             "provider_message": {
-                "code": null,
+                "code": "12345",
                 "message": "Transaction successful."
             },
             "transaction_status": {
@@ -158,7 +158,7 @@ response = urllib2.urlopen(request).read()
             "created_at": "2015-02-02T14:54:51.000+08:00",
             "provider_refno": "OTH-vyl2k4450aqzwm45cwau0055",
             "provider_message": {
-                "code": null,
+                "code": "12345",
                 "message": "Transaction successful."
             },
             "transaction_status": {
@@ -197,7 +197,7 @@ response = urllib2.urlopen(request).read()
             "created_at": "2015-02-02T14:52:39.000+08:00",
             "provider_refno": "OTH-x0ti5fn5vhivt2455yrejq55",
             "provider_message": {
-                "code": null,
+                "code": "12345",
                 "message": "Transaction successful."
             },
             "transaction_status": {
@@ -300,7 +300,7 @@ response = urllib2.urlopen(request).read()
     },
     "cost": "15.0",
     "created_at": "2015-02-17T16:14:56.000+08:00",
-    "provider_refno": null,
+    "provider_refno": "12345",
     "provider_message": {
         "code": "3000",
         "message": "MOBILE NUMBER IS INVALID"
@@ -332,6 +332,16 @@ response = urllib2.urlopen(request).read()
         }
     }
 }
+```
+
+> The JSON return value when you try to fetch a non-existing transactions
+
+```json
+[
+  {
+    "error": "Couldn't find Transaction with id=500"
+  }
+]
 ```
 
 Get the details of a specific transaction by using transaction id.
@@ -405,9 +415,9 @@ response = urllib2.urlopen(request).read()
     },
     "cost": "15.0",
     "created_at": "2015-05-08T10:03:42.423+08:00",
-    "provider_refno": null,
+    "provider_refno": "12345",
     "provider_message": {
-        "code": null,
+        "code": "12345",
         "message": "Transaction successful."
     },
     "transaction_status": {
@@ -437,16 +447,6 @@ response = urllib2.urlopen(request).read()
         }
     }
 }
-```
-
-> The JSON return value when you try to fetch a non-existing transactions
-
-```json
-[
-  {
-    "error": "Couldn't find Transaction with id=500"
-  }
-]
 ```
 
 Create a transaction by passing the sku and mobile number as payload.
@@ -527,9 +527,9 @@ response = urllib2.urlopen(request).read()
     },
     "cost": "15.0",
     "created_at": "2015-05-08T10:03:42.423+08:00",
-    "provider_refno": null,
+    "provider_refno": "12345",
     "provider_message": {
-        "code": null,
+        "code": "12345",
         "message": "Transaction successful."
     },
     "transaction_status": {
@@ -573,6 +573,533 @@ Parameter | Type | Description
 --------- | ---- | -----------
 product_id | numeric<br/>(required) | The product's id
 payload[account_id] | string<br/>(required) | The mobile number of the customer
+
+### Header Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+X-User-Email | string<br/>(required) | The user's email address
+X-User-Token | string<br/>(required) | The user's authentication token
+
+## Create a Bills Transaction using SKU
+
+```shell
+curl -X POST
+     -H 'X-User-Email: warex03@gmail.com'
+     -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
+     -F "sku=MAYNILADWATER"
+     -F "cost=999"
+     -F "payload[field1]=8374638222"
+     -F "payload[field2]=Koushirou Sugahara"
+     -F "customer[name]=Koushirou Sugahara"
+     -F "customer[email]=koushirou_sugahara@armyspy.com"
+     -F "customer[contact_number]=09123456789"
+     -F "customer[address]=Tokyo Japan"
+http://www.payswitch.net/api/transactions
+```
+
+```ruby
+require 'net/https'
+
+uri = URI("http://www.payswitch.net/api/transactions")
+params = {
+  "sku" => "MAYNILADWATER",
+  "cost" => "999",
+  "payload[field1]" => "8374638222",
+  "payload[field2]" => "Koushirou Sugahara",
+  "customer[name]" => "Koushirou Sugahara",
+  "customer[email]" => "koushirou_sugahara@armyspy.com",
+  "customer[contact_number]" => "09123456789",
+  "customer[address]" => "Tokyo Japan"
+}
+http = Net::HTTP.new(uri.host, uri.port)
+request_uri = Net::HTTP::Post.new(uri.request_uri)
+request_uri.add_field('X-User-Email', 'warex03@gmail.com')
+request_uri.add_field('X-User-Token', '_KHS4euMs1At4jsUHHdR')
+request_uri.set_form_data(params)
+
+response = http.request(request_uri)
+body = response.body
+```
+
+```python
+import urllib2
+
+URL = "http://www.payswitch.net/api/transactions"
+HEADERS = {
+    'X-User-Email' : 'warex03@gmail.com',
+    'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
+}
+PARAMS = {
+    'sku' : 'MAYNILADWATER',
+    'cost' : '999',
+    'payload[field1]' : '8374638222',
+    'payload[field2]' : 'Koushirou Sugahara',
+    'customer[name]' : 'Koushirou Sugahara',
+    'customer[email]' : 'koushirou_sugahara@armyspy.com',
+    'customer[contact_number]' : '09123456789',
+    'customer[address]' : 'Tokyo Japan'
+}
+
+data = urllib.urlencode(values)
+request = urllib2.Request(URL, data=data, headers=HEADERS)
+response = urllib2.urlopen(request).read()
+```
+
+> The JSON return value looks like this:
+
+```json
+{
+    "id": 1564,
+    "payload": {
+        "field1": "12345",
+        "field2": "Koushirou Sugahara"
+    },
+    "cost": "3.0",
+    "created_at": "2015-05-15T11:37:09.590+08:00",
+    "provider_refno": "12345",
+    "provider_message": {
+        "code": "12345",
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 181,
+        "product_category_root_id": 15,
+        "product": {
+            "id": 183,
+            "name": "Maynilad Water Services Inc."
+        },
+        "provider": {
+            "id": 9,
+            "name": "Ecpay"
+        }
+    }
+}
+```
+
+Create a Bills transaction by passing the sku, cost and account number.
+
+### HTTP Request
+
+`POST http://www.payswitch.net/api/transactions`
+
+Parameter | Type | Description
+--------- | ---- | -----------
+sku | string<br />(required) | The product's SKU code
+cost | string<br />(required) | The bill's amount
+payload[field1] | string<br />(required) | The account number of the customer
+payload[field2] | string<br />(required) | The customer's name
+customer[name] | string<br />(optional) | The customer's name
+customer[email] | string<br />(optional) | The customer's email
+customer[contact_number] | string<br />(optional) | The customer's contact number
+customer[address] | string<br />(optional) | The customer's address
+
+### Header Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+X-User-Email | string<br/>(required) | The user's email address
+X-User-Token | string<br/>(required) | The user's authentication token
+
+## Create a Bills Transaction using product ID
+
+```shell
+curl -X POST
+     -H 'X-User-Email: warex03@gmail.com'
+     -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
+     -F "product_id=183"
+     -F "cost=999"
+     -F "payload[field1]=8374638222"
+     -F "payload[field2]=Koushirou Sugahara"
+     -F "customer[name]=Koushirou Sugahara"
+     -F "customer[email]=koushirou_sugahara@armyspy.com"
+     -F "customer[contact_number]=09123456789"
+     -F "customer[address]=Tokyo Japan"
+http://www.payswitch.net/api/transactions
+```
+
+```ruby
+require 'net/https'
+
+uri = URI("http://www.payswitch.net/api/transactions")
+params = {
+  "product_id" => "183",
+  "cost" => "999",
+  "payload[field1]" => "8374638222",
+  "payload[field2]" => "Koushirou Sugahara",
+  "customer[name]" => "Koushirou Sugahara",
+  "customer[email]" => "koushirou_sugahara@armyspy.com",
+  "customer[contact_number]" => "09123456789",
+  "customer[address]" => "Tokyo Japan"
+}
+http = Net::HTTP.new(uri.host, uri.port)
+request_uri = Net::HTTP::Post.new(uri.request_uri)
+request_uri.add_field('X-User-Email', 'warex03@gmail.com')
+request_uri.add_field('X-User-Token', '_KHS4euMs1At4jsUHHdR')
+request_uri.set_form_data(params)
+
+response = http.request(request_uri)
+body = response.body
+```
+
+```python
+import urllib2
+
+URL = "http://www.payswitch.net/api/transactions"
+HEADERS = {
+    'X-User-Email' : 'warex03@gmail.com',
+    'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
+}
+PARAMS = {
+    'product_id' : '183',
+    'cost' : '999',
+    'payload[field1]' : '8374638222',
+    'payload[field2]' : 'Koushirou Sugahara',
+    'customer[name]' : 'Koushirou Sugahara',
+    'customer[email]' : 'koushirou_sugahara@armyspy.com',
+    'customer[contact_number]' : '09123456789',
+    'customer[address]' : 'Tokyo Japan'
+}
+
+data = urllib.urlencode(values)
+request = urllib2.Request(URL, data=data, headers=HEADERS)
+response = urllib2.urlopen(request).read()
+```
+
+> The JSON return value looks like this:
+
+```json
+{
+    "id": 1564,
+    "payload": {
+        "field1": "12345",
+        "field2": "Koushirou Sugahara"
+    },
+    "cost": "3.0",
+    "created_at": "2015-05-15T11:37:09.590+08:00",
+    "provider_refno": "12345",
+    "provider_message": {
+        "code": "12345",
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 181,
+        "product_category_root_id": 15,
+        "product": {
+            "id": 183,
+            "name": "Maynilad Water Services Inc."
+        },
+        "provider": {
+            "id": 9,
+            "name": "Ecpay"
+        }
+    }
+}
+```
+
+Create a Bills transaction by passing the product id, cost and account number.
+
+### HTTP Request
+
+`POST http://www.payswitch.net/api/transactions`
+
+Parameter | Type | Description
+--------- | ---- | -----------
+product_id | string<br />(required) | The product's ID
+cost | string<br />(required) | The bill's amount
+payload[field1] | string<br />(required) | The account number of the customer
+payload[field2] | string<br />(required) | The customer's name
+customer[name] | string<br />(optional) | The customer's name
+customer[email] | string<br />(optional) | The customer's email
+customer[contact_number] | string<br />(optional) | The customer's contact number
+customer[address] | string<br />(optional) | The customer's address
+
+### Header Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+X-User-Email | string<br/>(required) | The user's email address
+X-User-Token | string<br/>(required) | The user's authentication token
+
+## Create a Mobile Money Transaction using sku
+
+```shell
+curl -X POST
+     -H 'X-User-Email: warex03@gmail.com'
+     -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
+     -F "sku=GCASH_COLLECT"
+     -F "cost=999"
+     -F "payload[from_account_id]=09987654321"
+     -F "customer[name]=Koushirou Sugahara"
+     -F "customer[email]=koushirou_sugahara@armyspy.com"
+     -F "customer[contact_number]=09123456789"
+     -F "customer[address]=Tokyo Japan"
+http://www.payswitch.net/api/transactions
+```
+
+```ruby
+require 'net/https'
+
+uri = URI("http://www.payswitch.net/api/transactions")
+params = {
+  "sku" => "GCASH_COLLECT",
+  "cost" => "999",
+  "payload[from_account_id]" => "09987654321",
+  "customer[name]" => "Koushirou Sugahara",
+  "customer[email]" => "koushirou_sugahara@armyspy.com",
+  "customer[contact_number]" => "09123456789",
+  "customer[address]" => "Tokyo Japan"
+}
+http = Net::HTTP.new(uri.host, uri.port)
+request_uri = Net::HTTP::Post.new(uri.request_uri)
+request_uri.add_field('X-User-Email', 'warex03@gmail.com')
+request_uri.add_field('X-User-Token', '_KHS4euMs1At4jsUHHdR')
+request_uri.set_form_data(params)
+
+response = http.request(request_uri)
+body = response.body
+```
+
+```python
+import urllib2
+
+URL = "http://www.payswitch.net/api/transactions"
+HEADERS = {
+    'X-User-Email' : 'warex03@gmail.com',
+    'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
+}
+PARAMS = {
+    'sku' : 'GCASH_COLLECT',
+    'cost' : '999',
+    'payload[from_account_id]' : '09987654321',
+    'customer[name]' : 'Koushirou Sugahara',
+    'customer[email]' : 'koushirou_sugahara@armyspy.com',
+    'customer[contact_number]' : '09123456789',
+    'customer[address]' : 'Tokyo Japan'
+}
+
+data = urllib.urlencode(values)
+request = urllib2.Request(URL, data=data, headers=HEADERS)
+response = urllib2.urlopen(request).read()
+```
+
+> The JSON return value looks like this:
+  
+```json
+{
+    "id": 1566,
+    "payload": {
+        "from_account_id": "09987654321"
+    },
+    "cost": "1.0",
+    "created_at": "2015-05-15T12:33:32.315+08:00",
+    "provider_refno": "12345",
+    "provider_message": {
+        "code": "12345",
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 123,
+        "product_category_root_id": 12,
+        "product": {
+            "id": 123,
+            "name": "GCash Collect"
+        },
+        "provider": {
+            "id": 4,
+            "name": "Gcash"
+        }
+    }
+}
+```
+
+Create a Mobile Money transaction by passing the sku, cost and account number.
+
+### HTTP Request
+
+`POST http://www.payswitch.net/api/transactions`
+
+Parameter | Type | Description
+--------- | ---- | -----------
+sku | string<br />(required) | The product's SKU code
+cost | string<br />(required) | The amount of the transaction
+payload[from_account_id] | string<br />(required) | The account number of the customer
+customer[name] | string<br />(optional) | The customer's name
+customer[email] | string<br />(optional) | The customer's email
+customer[contact_number] | string<br />(optional) | The customer's contact number
+customer[address] | string<br />(optional) | The customer's address
+
+### Header Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+X-User-Email | string<br/>(required) | The user's email address
+X-User-Token | string<br/>(required) | The user's authentication token
+
+
+## Create a Mobile Money Transaction using product id
+
+```shell
+curl -X POST
+     -H 'X-User-Email: warex03@gmail.com'
+     -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
+     -F "sku=123"
+     -F "cost=999"
+     -F "payload[from_account_id]=09987654321"
+     -F "customer[name]=Koushirou Sugahara"
+     -F "customer[email]=koushirou_sugahara@armyspy.com"
+     -F "customer[contact_number]=09123456789"
+     -F "customer[address]=Tokyo Japan"
+http://www.payswitch.net/api/transactions
+```
+
+```ruby
+require 'net/https'
+
+uri = URI("http://www.payswitch.net/api/transactions")
+params = {
+  "sku" => "123",
+  "cost" => "999",
+  "payload[from_account_id]" => "09987654321",
+  "customer[name]" => "Koushirou Sugahara",
+  "customer[email]" => "koushirou_sugahara@armyspy.com",
+  "customer[contact_number]" => "09123456789",
+  "customer[address]" => "Tokyo Japan"
+}
+http = Net::HTTP.new(uri.host, uri.port)
+request_uri = Net::HTTP::Post.new(uri.request_uri)
+request_uri.add_field('X-User-Email', 'warex03@gmail.com')
+request_uri.add_field('X-User-Token', '_KHS4euMs1At4jsUHHdR')
+request_uri.set_form_data(params)
+
+response = http.request(request_uri)
+body = response.body
+```
+
+```python
+import urllib2
+
+URL = "http://www.payswitch.net/api/transactions"
+HEADERS = {
+    'X-User-Email' : 'warex03@gmail.com',
+    'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
+}
+PARAMS = {
+    'sku' : '123',
+    'cost' : '999',
+    'payload[from_account_id]' : '09987654321',
+    'customer[name]' : 'Koushirou Sugahara',
+    'customer[email]' : 'koushirou_sugahara@armyspy.com',
+    'customer[contact_number]' : '09123456789',
+    'customer[address]' : 'Tokyo Japan'
+}
+
+data = urllib.urlencode(values)
+request = urllib2.Request(URL, data=data, headers=HEADERS)
+response = urllib2.urlopen(request).read()
+```
+
+> The JSON return value looks like this:
+  
+```json
+{
+    "id": 1566,
+    "payload": {
+        "from_account_id": "09987654321"
+    },
+    "cost": "1.0",
+    "created_at": "2015-05-15T12:33:32.315+08:00",
+    "provider_refno": "12345",
+    "provider_message": {
+        "code": "12345",
+        "message": "Transaction successful."
+    },
+    "transaction_status": {
+        "code": "00",
+        "name": "Successful",
+        "description": "Transaction has been successful"
+    },
+    "user": {
+        "id": 2,
+        "type": "Branch",
+        "name": "Demo Branch",
+        "merchant": {
+            "id": 1,
+            "name": "Demo Merchant"
+        }
+    },
+    "provider_product": {
+        "id": 123,
+        "product_category_root_id": 12,
+        "product": {
+            "id": 123,
+            "name": "GCash Collect"
+        },
+        "provider": {
+            "id": 4,
+            "name": "Gcash"
+        }
+    }
+}
+```
+
+Create a Mobile Money transaction by passing the product ID, cost and account number.
+
+### HTTP Request
+
+`POST http://www.payswitch.net/api/transactions`
+
+Parameter | Type | Description
+--------- | ---- | -----------
+product_id | string<br />(required) | The product's ID
+cost | string<br />(required) | The amount of the transaction
+payload[from_account_id] | string<br />(required) | The account number of the customer
+customer[name] | string<br />(optional) | The customer's name
+customer[email] | string<br />(optional) | The customer's email
+customer[contact_number] | string<br />(optional) | The customer's contact number
+customer[address] | string<br />(optional) | The customer's address
 
 ### Header Parameters
 
