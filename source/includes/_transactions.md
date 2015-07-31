@@ -334,16 +334,6 @@ response = urllib2.urlopen(request).read()
 }
 ```
 
-> The JSON return value when you try to fetch a non-existing transactions
-
-```json
-[
-  {
-    "error": "Couldn't find Transaction with id=500"
-  }
-]
-```
-
 Get the details of a specific transaction by using transaction id.
 
 ### HTTP Request
