@@ -2905,11 +2905,11 @@ http://www.payswitch.net/api/branches/agents
 <pre><code class="highlight shell">curl -X GET
      -H <span class="s1">'X-User-Email: warex03@gmail.com'</span>
      -H <span class="s1">'X-User-Token: _KHS4euMs1At4jsUHHdR'</span>
-http://www.payswitch.net/api/agents/2
+http://www.payswitch.net/api/branches/2
 </code></pre>
 <pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'net/https'</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/agents/2"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"http://www.payswitch.net/api/branches/2"</span><span class="p">)</span>
 
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request_uri</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
@@ -2921,7 +2921,7 @@ http://www.payswitch.net/api/agents/2
 </code></pre>
 <pre><code class="highlight python"><span class="kn">import</span> <span class="nn">urllib2</span>
 
-<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/agents/2"</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s">"http://www.payswitch.net/api/branches/2"</span>
 <span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'X-User-Email'</span> <span class="p">:</span> <span class="s">'warex03@gmail.com'</span><span class="p">,</span>
     <span class="s">'X-User-Token'</span> <span class="p">:</span> <span class="s">'_KHS4euMs1At4jsUHHdR'</span>
