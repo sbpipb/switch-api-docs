@@ -226,13 +226,13 @@ Agent | FALSE | Permission error message
 curl -X GET
      -H 'X-User-Email: warex03@gmail.com'
      -H 'X-User-Token: _KHS4euMs1At4jsUHHdR'
-http://www.payswitch.net/api/agents/2
+http://www.payswitch.net/api/branches/2
 ```
 
 ```ruby
 require 'net/https'
 
-uri = URI("http://www.payswitch.net/api/agents/2")
+uri = URI("http://www.payswitch.net/api/branches/2")
 
 http = Net::HTTP.new(uri.host, uri.port)
 request_uri = Net::HTTP::Get.new(uri.request_uri)
@@ -246,7 +246,7 @@ body = response.body
 ```python
 import urllib2
 
-URL = "http://www.payswitch.net/api/agents/2"
+URL = "http://www.payswitch.net/api/branches/2"
 HEADERS = {
     'X-User-Email' : 'warex03@gmail.com',
     'X-User-Token' : '_KHS4euMs1At4jsUHHdR'
